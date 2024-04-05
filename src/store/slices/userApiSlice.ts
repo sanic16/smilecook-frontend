@@ -9,17 +9,16 @@ const userApiSlice = api.injectEndpoints({
                 body: body
             }) 
         }),
-        changeAvatar: builder.mutation<{presignedUrl: string}, void>({
+        changeAvatar: builder.mutation<{presigned_url: string}, void>({
             query: () => ({
                 url: 'users/avatar',
                 method: 'PUT'
             })
         }),
-        uploadAvatar: builder.mutation<void, {presignedUrl: string, file: File}>({
-            query: ({presignedUrl, file }) => ({
-                url: presignedUrl,
-                method: 'PUT',
-                body: file
+        confirmAvatarChange: builder.mutation<void, void>({
+            query: () => ({
+                url: 'users/avatar',
+                method: 'POST'
             })
         })
     })
@@ -28,5 +27,5 @@ const userApiSlice = api.injectEndpoints({
 export const {
     useRegisterMutation,
     useChangeAvatarMutation,
-    useUploadAvatarMutation
+    useConfirmAvatarChangeMutation
 } = userApiSlice

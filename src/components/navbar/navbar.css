@@ -1,0 +1,49 @@
+.nav{
+    background-color: var(--primary-color);
+    position: fixed;
+    height: 5rem;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    display: grid;
+    place-items: center;
+}
+
+.nav__mobile{
+    display: none;
+}
+
+.nav__container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav__logo{
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: 500;
+    font-family: 'Pacifico', cursive;
+}
+
+.nav__menu ul{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav__auth{
+    display: flex;
+    align-items: center;
+}
+
+.nav__auth a{
+    color: var(--gray-color);
+    padding: 0.5rem 1.5rem;
+}
+
+.nav__auth a:last-child{
+    background-color: var(--secondary-color);
+
+}
