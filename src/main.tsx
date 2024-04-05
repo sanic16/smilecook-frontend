@@ -9,6 +9,7 @@ import Register from './pages/register/Register.tsx'
 import './index.css'
 import { Provider } from 'react-redux'
 import store from './store/store.ts'
+import Profile from './pages/profile/Profile.tsx'
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
+      { path: 'profile', element: <Profile />},
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register />}
     ]

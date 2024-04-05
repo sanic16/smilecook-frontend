@@ -1,6 +1,8 @@
 import React, { useState } from "react"
+import { login } from "../../store/slices/authSlice"
 import { useLoginMutation } from "../../store/slices/userApiSlice"
 import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
 
 import { toast } from "react-toastify"
 import { Link } from "react-router-dom"
@@ -12,9 +14,10 @@ const Login = () => {
     password: '',
   })  
 
-  const [login, { isLoading }] = useLoginMutation()
+  const [authenticate, { isLoading }] = useLoginMutation()
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
  
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setUserData(prevData => ({
@@ -27,12 +30,11 @@ const Login = () => {
     e.preventDefault()
     try {
        
-        const res = await login({
+        const res = await authenticate({
             email: userData.email,
             password: userData.password,
         }).unwrap()
-        console.log(res)
-        toast.success('Has iniciado sesión!!')
+        dispatch(login(res))
         navigate('/')
     } catch (error) {
         toast.error('Error al iniciar sesión')

@@ -7,84 +7,62 @@ const Profile = () => {
   return (
     <section className="profile">
         <div className="container profile__container">
-            <h1>
-                Perfil
-            </h1>
-            <div className="form__container">
-                <div
-                    className="form__container-left"
-                >                    
+            
+            <div className="profile__form-container">
+                <h1>
+                    Perfil
+                </h1>         
                 <Avatar />
-                </div>
-                <div
-                    className="form__container-right"
-                >
-                    <form>
-                        <div className="fields__wrapper">
-                        <div>
-                            <label
-                                htmlFor="username"
-                            >
-                                Nombre de usuario
-                            </label>
-                            <input
-                                type="text"
-                                name="username"
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="name">
-                                Nombre
-                            </label>
-                            <input
-                                type="text"
-                                name="name"
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="email">
-                                Email
-                            </label>
-                            <input
-                                type="email"
-                                name="email"
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="password">
-                                Contraseña
-                            </label>
-                            <input
-                                type="password"
-                                name="password"
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="confirmPassword">
-                                Confirmar contraseña
-                            </label>
-                            <input
-                                type="password"
-                                name="confirmPassword"
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="bio">
-                                Biografía
-                            </label>
-                            <textarea
-                                name="bio"
-                            >
-                            </textarea>                            
-                        </div>
-                        </div>
-                        <button
-                            type="submit"
+            
+                <form className="profile__form">
+                    
+                    <div>
+                        <label
+                            htmlFor="username"
                         >
-                            Guardar
-                        </button>
-                    </form>
-                </div>
+                            Nombre de usuario
+                        </label>
+                        <input
+                            type="text"
+                            name="username"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="name">
+                            Nombre
+                        </label>
+                        <input
+                            type="text"
+                            name="name"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="email">
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            name="email"
+                        />
+                    </div>
+                    
+                    <div>
+                        <label htmlFor="bio">
+                            Biografía
+                        </label>
+                        <textarea
+                            name="bio"
+                        >
+                        </textarea>                            
+                    </div>
+                    <button
+                        type="submit"
+                        className="btn primary"
+                    >
+                        Guardar
+                    </button>
+                </form>
+                
             </div>
         </div>
     </section>

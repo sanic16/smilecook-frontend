@@ -6,13 +6,14 @@ import {
 
 import profile from './../../assets/julio.jpg'
 import { toast } from "react-toastify"
+import { FaEdit, FaUpload } from "react-icons/fa"
 
 const Avatar = () => {
+    const [loading, setLoading] = useState(false)
     const [avatar, setAvatar] = useState<File | null>(null)
     const [avatarUrl, setAvatarUrl] = useState<string>(profile)
   
-    const [changeAvatar] = useChangeAvatarMutation()
-  
+    const [changeAvatar] = useChangeAvatarMutation()  
     const [confirmAvatarChange] = useConfirmAvatarChangeMutation()
     
     const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,6 +26,7 @@ const Avatar = () => {
   
     const handleUploadAvatar = async(e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault()
+      setLoading(true)
       try {
           const pregignedUrl = await changeAvatar().unwrap()
           console.log(pregignedUrl.presigned_url)
@@ -46,11 +48,12 @@ const Avatar = () => {
       } catch (error) {
           toast.error('Error al subir la imagen') 
       }
+        setLoading(false)
     }
   return (
     <div className="profile__avatar-container">
         <label 
-            htmlFor="avatar"
+            htmlFor="profileAvatar"
         >
             <div className="profile__avatar">
                 <img 
@@ -64,23 +67,25 @@ const Avatar = () => {
         >
             {
                 !avatar && <label
-                className="btn white"
-                htmlFor="avatar"
+                className="btn__edit-avatar"
+                htmlFor="profileAvatar"
             >
-                Seleccionar
+                <FaEdit />
             </label>
             }
             <input 
                 type="file" 
-                id="avatar"
+                id="profileAvatar"
                 onChange={handleAvatarChange}
             />
             {
                 avatar && (
                     <button
-                        className="btn info"
+                        className={`btn__upload-avatar ${loading ? 'loading' : ''}`}
+                        type="submit"
+                        disabled={loading}
                     >
-                        Subir
+                        <FaUpload /> 
                     </button>
                 )
             }

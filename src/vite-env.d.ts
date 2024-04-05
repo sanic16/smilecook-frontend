@@ -40,3 +40,11 @@ type LoginResponse = {
     refresh_token_expires_in: number
     user: AuthUser
 }
+
+type AuthState = {
+    user: AuthUser | null
+    access_token: string | null
+    refresh_token: string | null
+    access_token_expires_in: number | null
+    refresh_token_expires_in: number | null
+}

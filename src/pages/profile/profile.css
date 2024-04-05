@@ -1,44 +1,78 @@
-.profile__container{    
-    min-height: 100vh;
+.profile{
+    padding: 0;
+}
+.profile__container{
+    min-height: calc(100vh - 5rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.form__container{
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 2rem;
-    width: 100%;
-    padding: 1rem;
-}
-
-.profile__avatar-container{
-    width: fit-content;
+.profile__form-container{
+    width: var(--width-form);
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    align-items: center;
 }
 
-.profile__avatar-container form input[type="file"]{
-    display: none;
+
+.profile__avatar-container{
+    position: relative;
 }
 
 .profile__avatar{
-    width: 10rem;
+    width: 12rem;
     aspect-ratio: 1/1;
-    border-radius: 0.25rem;
+    border-radius: 50%;
     overflow: hidden;
-    margin-inline: auto;
+}
+.btn__edit-avatar,
+.btn__upload-avatar{
+    position: absolute;
+    left: 0.1rem;
+    bottom: 1rem;
+    background-color: var(--secondary-color);
+    padding: 0.9rem;
+    display: flex;
+    border-radius: 50%;
 }
 
-.form__container-right{
+.btn__upload-avatar{
+    right: 0.1rem;
+    left: auto;
 }
-.form__container-right form{
+
+.btn__upload-avatar.loading{
+    background-color: var(--gray-color);
+}
+
+#profileAvatar{
+    display: none;
+}
+
+.profile__form{
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 1rem;    
+    gap: 0.5rem;
 }
 
-.form__container-right form div{
+.profile__form button{
+    margin-top: 0.5rem;
+}
+
+.profile__form div{
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
+}
+
+.profile__form label{
+    color: var(--secondary-color);
+}
+
+@media screen and (max-width: 768px){
+    .profile__form-container{
+        width: 100%;
+    }
 }
