@@ -9,6 +9,13 @@ const userApiSlice = api.injectEndpoints({
                 body: body
             }) 
         }),
+        login: builder.mutation<LoginResponse, UserLogin>({
+            query: (body) => ({
+                url: 'token',
+                method: 'POST',
+                body
+            })
+        }),
         changeAvatar: builder.mutation<{presigned_url: string}, void>({
             query: () => ({
                 url: 'users/avatar',
@@ -26,6 +33,7 @@ const userApiSlice = api.injectEndpoints({
 
 export const {
     useRegisterMutation,
+    useLoginMutation,
     useChangeAvatarMutation,
     useConfirmAvatarChangeMutation
 } = userApiSlice

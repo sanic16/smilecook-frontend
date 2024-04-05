@@ -20,3 +20,23 @@ type UserRegistration = {
     password: string
     bio: string  
 } 
+
+type UserLogin = {
+    email: string
+    password: string
+}
+
+type AuthUser = {
+    username: string
+    name: string
+    is_active: boolean
+    is_admin: boolean
+    avatar_url: string
+}
+type LoginResponse = {
+    access_token: string
+    access_token_expires_in: number
+    refresh_token: string
+    refresh_token_expires_in: number
+    user: AuthUser
+}

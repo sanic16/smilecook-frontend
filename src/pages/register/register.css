@@ -1,3 +1,7 @@
+.register{
+    padding: 0;
+}
+
 .form__container{
     display: grid;
     place-items: center;
