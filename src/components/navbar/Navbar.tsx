@@ -23,7 +23,7 @@ const Navbar = () => {
                 to='/'
                 className='nav__logo'
             >
-                JuliusFood 
+                Julius<span>Food</span>
             </Link>
             <div className="nav__menu-wrapper">
                 {
@@ -33,6 +33,11 @@ const Navbar = () => {
                                 <li>
                                     <Link to='/profile'>
                                         {auth.user.username}
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to='/create-recipe'>
+                                        Crear Receta
                                     </Link>
                                 </li>
                                 <li>

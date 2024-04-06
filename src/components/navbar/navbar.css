@@ -27,6 +27,10 @@
     font-family: 'Pacifico', cursive;
 }
 
+.nav__logo span{
+    color: var(--secondary-color);
+}
+
 .nav__menu ul{
     display: flex;
     align-items: center;
@@ -42,6 +46,8 @@
     color: var(--gray-color);
     padding: 0.5rem 1.5rem;
 }
+
+
 
 .nav__auth a:last-child{
     background-color: var(--secondary-color);

@@ -48,3 +48,38 @@ type AuthState = {
     access_token_expires_in: number | null
     refresh_token_expires_in: number | null
 }
+
+type Recipe = {
+    id: number
+    name: string
+    description: string
+    directions: string[]
+    ingredients: string[]
+    num_of_servings: number
+    cook_time: number
+    is_publish: boolean
+    cover_image: string
+    author: {
+        id: number
+        username: string
+    },
+    created_at: string
+    updated_at: string
+}
+
+type RecipeCreation = {
+    name: string
+    description: string
+    num_of_servings: number
+    cook_time: number
+    directions: string[]
+    ingredients: string[]
+}
+
+type RecipeAction = 
+  | { type: 'name', payload: string }
+  | { type: 'description', payload: string }
+  | { type: 'num_of_servings', payload: number }
+  | { type: 'cook_time', payload: number }
+  | { type: 'directions', payload: string[] }
+  | { type: 'ingredients', payload: string[] };

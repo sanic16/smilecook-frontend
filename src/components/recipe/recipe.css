@@ -1,0 +1,54 @@
+.card.recipe{
+    padding: .7rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.recipe__header{
+    margin-bottom: 0.5rem;
+}
+
+.recipe__cover{
+    width: 100%;
+    aspect-ratio: 16/10;
+}
+
+.recipe__name{
+    color: var(--secondary-color);
+    margin-top: 0.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.recipe__footer{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.recipe__footer button{
+    align-self: flex-end;
+}
+
+.recipe__footer-info{
+    display: flex;
+    justify-content: space-between;  
+}
+
+.recipe__footer-info-item{
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.recipe__footer-info-item small{
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+.recipe__footer-author{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.3rem;
+}

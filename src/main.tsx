@@ -10,6 +10,7 @@ import './index.css'
 import { Provider } from 'react-redux'
 import store from './store/store.ts'
 import Profile from './pages/profile/Profile.tsx'
+import CreateRecipe from './pages/create-recipe/CreateRecipe.tsx'
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,8 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: 'profile', element: <Profile />},
       { path: 'login', element: <Login /> },
-      { path: 'register', element: <Register />}
+      { path: 'register', element: <Register />},
+      { path: 'create-recipe', element: <CreateRecipe /> }
     ]
   }
 ])
