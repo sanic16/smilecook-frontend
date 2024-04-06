@@ -7,7 +7,7 @@
     
 
     --info-color: #00b0ff;
-    --danger-color: #ff3d00;
+    --danger-color: #ff6347;
     --warning-color: #ff9100;
     --success-color: #00c853;
     --gray-color: #f5f5f5;
@@ -129,6 +129,10 @@ section{
 
 .btn.success{
     background-color: var(--success-color);
+}
+
+.btn.danger{
+    background-color: var(--danger-color);
 }
 
 .btn.disabled{

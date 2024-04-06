@@ -41,7 +41,7 @@ const Navbar = () => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to='/'>
+                                    <Link to='/dashboard'>
                                         Mis Recetas
                                     </Link>
                                 </li>

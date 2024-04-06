@@ -59,6 +59,7 @@ type Recipe = {
     cook_time: number
     is_publish: boolean
     cover_image: string
+    popularity: number
     author: {
         id: number
         username: string

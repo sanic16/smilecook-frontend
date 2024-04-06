@@ -26,6 +26,30 @@ const recipeApiSlice = api.injectEndpoints({
                 url: `recipes/${body.id}/cover`,
                 method: 'POST'
             })
+        }),
+        publishRecipe: builder.mutation<void, {id: number}>({
+            query: (body) => ({
+                url: `recipes/${body.id}/publish`,
+                method: 'PUT'
+            })
+        }),
+        unPublishRecipe: builder.mutation<void, {id: number}>({
+            query: (body) => ({
+                url: `recipes/${body.id}/publish`,
+                method: 'DELETE'
+            })
+        }),
+        getMyRecipes: builder.query<{data: Recipe[]}, void>({
+            query: () => ({
+                url: 'me/recipes',
+                method: 'GET',
+            })
+        }),
+        deleteRecipe: builder.mutation<void, {id: number}>({
+            query: (body) => ({
+                url: `recipes/${body.id}`,
+                method: 'DELETE'
+            })
         })
     })
 })
@@ -34,5 +58,9 @@ export const {
     useGetRecipesQuery,
     useCreateRecipeMutation,
     useChangeAvatarMutation,
-    useConfirmCoverChangeMutation
+    useConfirmCoverChangeMutation,
+    usePublishRecipeMutation,
+    useUnPublishRecipeMutation,
+    useGetMyRecipesQuery,
+    useDeleteRecipeMutation
 } = recipeApiSlice

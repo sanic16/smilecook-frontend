@@ -11,6 +11,7 @@ import { Provider } from 'react-redux'
 import store from './store/store.ts'
 import Profile from './pages/profile/Profile.tsx'
 import CreateRecipe from './pages/create-recipe/CreateRecipe.tsx'
+import Dashboard from './pages/dashboard/Dashboard.tsx'
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,8 @@ const router = createBrowserRouter([
       { path: 'profile', element: <Profile />},
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register />},
-      { path: 'create-recipe', element: <CreateRecipe /> }
+      { path: 'create-recipe', element: <CreateRecipe /> },
+      { path: 'dashboard', element: <Dashboard />}
     ]
   }
 ])

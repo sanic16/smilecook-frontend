@@ -1,0 +1,42 @@
+.dashboard__recipe{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-radius: var(--border-radius-2);
+    background-color: var(--gray-color);
+}
+
+.dashboard__recipe-left{
+    display: flex;
+    gap: 1rem;
+}
+
+.dashboard__recipe-cover{
+    width: 10rem;
+    aspect-ratio: 16/9;
+    border-radius: var(--border-radius-1);
+    overflow: hidden;
+}
+
+.dashboard__recipe-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.dashboard__recipe-info-items{
+    display: flex;
+    gap: 0.5rem;
+}
+
+.dashboard__recipe-info-items small{
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.dashboard__recipe-actions{
+    display: flex;
+    gap: 0.5rem;
+}

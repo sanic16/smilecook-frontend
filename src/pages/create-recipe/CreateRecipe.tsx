@@ -5,7 +5,8 @@ import ModalInput from '../../components/modal-input/ModalInput'
 import { 
   useCreateRecipeMutation,
   useChangeAvatarMutation,
-  useConfirmCoverChangeMutation
+  useConfirmCoverChangeMutation,
+  usePublishRecipeMutation
 } from '../../store/slices/recipeApiSlice'
 import { toast } from 'react-toastify'
 
@@ -60,6 +61,8 @@ const CreateRecipe = () => {
   const [isOpenIngredientsModal, setIsOpenIngredientsModal] = useState(false)
   const [recipeData, dispatch] = useReducer(recipeReducer, initialState)
   const [coverFile, setCoverFile] = useState<File | null>(null)
+  const [publishRecipe, setPublishRecipe] = useState<boolean>(false)
+  const [loading, setLoading] = useState(false)
 
   const handleAddDirections = (value: string) => {
     dispatch({type: 'directions', payload: [...recipeData.directions, value]})
@@ -72,6 +75,7 @@ const CreateRecipe = () => {
   const [createRecipe] = useCreateRecipeMutation()
   const [changeCover] = useChangeAvatarMutation()
   const [confirmCoverChange] = useConfirmCoverChangeMutation()
+  const [publish] = usePublishRecipeMutation()
 
   const coverFileHandler = (file: File) => {
     setCoverFile(file)
@@ -79,6 +83,42 @@ const CreateRecipe = () => {
 
   const handleCreateRecipe = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setLoading(true)
+    if(!coverFile){
+      toast.error('Debes agregar una imagen de portada')
+      setLoading(false)
+      return
+    }
+    if(recipeData.directions.length === 0){
+      toast.error('Debes agregar al menos una instrucción')
+      setLoading(false)
+      return
+    }
+    if(recipeData.ingredients.length === 0){
+      toast.error('Debes agregar al menos un ingrediente')
+      setLoading(false)
+      return
+    }
+    if(recipeData.name === '' || recipeData.description === '' || recipeData.num_of_servings === 0 || recipeData.cook_time === 0){
+      toast.error('Debes llenar todos los campos')
+      setLoading(false)
+      return
+    }
+    if(recipeData.num_of_servings < 1 || recipeData.cook_time < 1){
+      toast.error('El número de porciones y el tiempo de cocción deben ser mayores a 0')
+      setLoading(false)
+      return
+    }
+    if(recipeData.name.length > 50){
+      toast.error('El nombre de la receta no puede tener más de 50 caracteres')
+      setLoading(false)
+      return
+    }
+    if(recipeData.description.length > 500){
+      toast.error('La descripción de la receta no puede tener más de 500 caracteres')
+      setLoading(false)
+      return
+    }
     try {
       const id = await createRecipe(recipeData).unwrap()
       console.log(id)
@@ -96,9 +136,14 @@ const CreateRecipe = () => {
         console.log('Cover uploaded')
       }
       toast.success('Receta creada correctamente')
+      if(publishRecipe){
+        await publish(id).unwrap()
+        toast.success('Receta publicada correctamente')
+      }
     } catch (error) {
       toast.error('Error al crear la receta')
     }
+    setLoading(false)
   }
   return (
     <section
@@ -175,10 +220,24 @@ const CreateRecipe = () => {
 
                       <button
                           type="submit"
-                          className="btn success"
+                          className={`btn ${loading ? 'disabled' : 'success'}`}
+                          disabled={loading}
+
                       >
-                          Crear receta
+                          { loading ? 'Creando receta...' :  'Crear receta' }
                       </button>
+                      <div>
+                        <label htmlFor="publishRecipe">
+                          Publicar receta
+                        </label>
+                        <input
+                          type='checkbox'
+                          id='publishRecipe'
+                          name='publishRecipe'
+                          checked={publishRecipe}
+                          onChange={(e) => setPublishRecipe(e.target.checked)}
+                        />
+                      </div>
                   </div> 
                   
                   
