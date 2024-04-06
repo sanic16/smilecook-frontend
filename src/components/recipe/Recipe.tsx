@@ -1,6 +1,7 @@
 import { FaClock, FaListUl } from 'react-icons/fa'
 import Card from '../card/Card'
 import './recipe.css'
+import { Link } from 'react-router-dom'
 
 const Recipe = (
     {
@@ -27,9 +28,12 @@ const Recipe = (
                 
                
             <div className='recipe__footer'> 
-                 <button className='btn'>
+                 <Link 
+                    to={`recipe/${recipe.id}`}
+                    className='btn'
+                >
                     Ver receta
-                </button>
+                </Link>
                 <div
                     className='recipe__footer-info'
                 >

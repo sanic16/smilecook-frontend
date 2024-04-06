@@ -44,21 +44,29 @@ const DashboardRecipe = (
       </div>
       <div className="dashboard__recipe-right">
         <div className="dashboard__recipe-actions">
-            <button className="btn">
+            <button className="btn sm">
               ver
             </button>
             <button 
-              className="btn info"
+              className="btn info sm"
              
             >
               editar
             </button>
             <button 
-              className={`btn danger ${loadingDelete ? 'disabled' : ''}`}
+              className={`btn danger ${loadingDelete ? 'disabled' : ''} sm`}
               onClick={handleDelete}
               disabled={loadingDelete}
             >
               eliminar
+            </button>
+        </div>
+        <div className="dashboard__recipe-publish">
+            <button className="btn success sm">
+              publicar
+            </button>
+            <button className="btn danger sm">
+              despublicar
             </button>
         </div>
       </div>

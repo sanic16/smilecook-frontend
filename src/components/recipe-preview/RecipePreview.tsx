@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import defaultCover from '../../assets/default_cover.jpg'
 import { FaClock, FaListUl } from "react-icons/fa"
 
@@ -23,15 +23,16 @@ const RecipePreview = (
 ) => {
     const [cover, setCover] = useState<File | null>(null)
     const [coverUrl, setCoverUrl] = useState(defaultCover)
-
+    useEffect(() => {
+        if(cover && onChangeCover){
+            onChangeCover(cover)
+        }
+    }, [cover, onChangeCover])
     const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files
         if(file){
             setCover(file[0])
-            setCoverUrl(URL.createObjectURL(file[0]))
-            if(cover && onChangeCover){
-                onChangeCover(cover)
-            }
+            setCoverUrl(URL.createObjectURL(file[0]))           
         }
     }
 

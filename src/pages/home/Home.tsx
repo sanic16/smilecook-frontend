@@ -1,13 +1,23 @@
+import Loader from "../../components/loader/Loader"
 import Recipes from "../../components/recipes/Recipes"
 import { useGetRecipesQuery } from "../../store/slices/recipeApiSlice"
+import './home.css'
 
 const Home = () => {
-  const { data } = useGetRecipesQuery()
+  const { data, isLoading, isError } = useGetRecipesQuery()
   return (
-    <section>
-      <div className="container">
+    <section className="home">
+      <div className="container home__container">
         {
-          data && <Recipes recipes={data.data} />
+          isLoading ? (
+            <Loader />
+          ) : isError || !data ? (
+            <h1>
+              Error al cargar las recetas
+            </h1>
+          ) : (            
+            <Recipes recipes={data.data} />            
+          )
         }
       </div>
     </section>

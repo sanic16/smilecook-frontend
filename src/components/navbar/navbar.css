@@ -7,6 +7,7 @@
     width: 100vw;
     display: grid;
     place-items: center;
+    z-index: 1;
 }
 
 .nav__mobile{
@@ -37,6 +38,11 @@
     gap: 1rem;
 }
 
+.nav__menu ul a.active,
+.nav__menu ul a:hover{
+    color: var(--secondary-color);
+}
+
 .nav__auth{
     display: flex;
     align-items: center;
@@ -47,9 +53,63 @@
     padding: 0.5rem 1.5rem;
 }
 
-
+.nav__auth a:first-child.active,
+.nav__auth a:first-child:hover{
+   color: var(--secondary-color);
+}
 
 .nav__auth a:last-child{
     background-color: var(--secondary-color);
+}
 
+.nav__auth a:last-child:hover,
+.nav__auth a:last-child.active{
+    color: var(--primary-color);
+}
+
+@media screen and (min-width: 900px){
+    .hide__desktop{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 900px){
+    
+    .nav__menu-wrapper ul{
+        position: fixed;
+        top: -100vh;
+        height: calc(100vh - 5rem);
+        left: 0;
+        width: 100vw;
+        background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(3px);
+        font-size: 1.1rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.3rem;
+        transition: top 0.5s;
+    }
+
+    .nav__menu-wrapper ul li:first-child{
+        margin-top: 8rem;
+    }
+
+    .nav__menu-wrapper.show ul{
+        top: 5rem;
+    }
+
+    .nav__mobile{
+        display: block;        
+    }
+
+    .nav__auth{
+        display: none;
+    }
+
+    .nav__mobile button{
+        display: flex;
+        background-color: transparent;
+        color: var(--gray-color);
+        font-size: 1.65rem;
+    }
 }

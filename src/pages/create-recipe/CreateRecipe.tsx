@@ -9,6 +9,7 @@ import {
   usePublishRecipeMutation
 } from '../../store/slices/recipeApiSlice'
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 const initialState: RecipeCreation = {
   name: '',
@@ -77,8 +78,10 @@ const CreateRecipe = () => {
   const [confirmCoverChange] = useConfirmCoverChangeMutation()
   const [publish] = usePublishRecipeMutation()
 
+  const navigate = useNavigate()
+
   const coverFileHandler = (file: File) => {
-    setCoverFile(file)
+    setCoverFile(file)    
   }
 
   const handleCreateRecipe = async(e: React.FormEvent<HTMLFormElement>) => {
@@ -121,9 +124,7 @@ const CreateRecipe = () => {
     }
     try {
       const id = await createRecipe(recipeData).unwrap()
-      console.log(id)
       const presignedUrl = await changeCover(id).unwrap()
-      console.log(presignedUrl.presigned_url)
       const res = await fetch(presignedUrl.presigned_url, {
         method: 'PUT',
         headers: {
@@ -133,13 +134,13 @@ const CreateRecipe = () => {
       })
       if(res.ok){
         await confirmCoverChange(id).unwrap()
-        console.log('Cover uploaded')
       }
       toast.success('Receta creada correctamente')
       if(publishRecipe){
         await publish(id).unwrap()
         toast.success('Receta publicada correctamente')
       }
+      navigate(`/recipe/${id.id}`)
     } catch (error) {
       toast.error('Error al crear la receta')
     }
@@ -204,7 +205,7 @@ const CreateRecipe = () => {
                   <div className="form__group-actions">
                       <button 
                           type="button"
-                          className="btn"
+                          className="btn small"
                           onClick={() => setIsOpenDirectionsModal(true)}
                       >
                           Agregar instrucción
@@ -212,7 +213,7 @@ const CreateRecipe = () => {
                  
                       <button
                           type="button"
-                          className="btn"
+                          className="btn small"
                           onClick={() => setIsOpenIngredientsModal(true)}
                       >
                           Agregar ingrediente
@@ -220,7 +221,7 @@ const CreateRecipe = () => {
 
                       <button
                           type="submit"
-                          className={`btn ${loading ? 'disabled' : 'success'}`}
+                          className={`btn ${loading ? 'disabled' : 'success'} small`}
                           disabled={loading}
 
                       >

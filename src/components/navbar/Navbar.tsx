@@ -1,16 +1,22 @@
 import { logout } from '../../store/slices/authSlice'
 import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { FaBars } from 'react-icons/fa'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { FaBars, FaTimes } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
 import './navbar.css'
+import { useState } from 'react'
 
 const Navbar = () => {
+  const [showMenu, setShowMenu] = useState(false)
+  const closeMenu = () => setShowMenu(false)
   const auth = useSelector((state: {auth: AuthState}) => state.auth)  
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  if(showMenu) window.document.body.style.overflow = 'hidden'
+  else window.document.body.style.overflow = 'auto'
+  
   const handleLogout = () => {
     dispatch(logout())
     navigate('/')
@@ -25,58 +31,112 @@ const Navbar = () => {
             >
                 Julius<span>Food</span>
             </Link>
-            <div className="nav__menu-wrapper">
+            <div className={`nav__menu-wrapper ${showMenu && window.innerWidth < 900 ? 'show' : undefined}`}>
+                <div 
+                    className="nav__menu"
+                >
                 {
                     auth?.user ? (
-                        <div className="nav__menu">
                             <ul>
                                 <li>
-                                    <Link to='/profile'>
+                                    <NavLink 
+                                        to='/profile'
+                                        onClick={closeMenu}
+                                        className={({isActive}) => `${isActive ? 'active' : undefined}` }
+                                    >
                                         {auth.user.username}
-                                    </Link>
+                                    </NavLink>
                                 </li>
                                 <li>
-                                    <Link to='/create-recipe'>
+                                    <NavLink 
+                                        to='/create-recipe'
+                                        onClick={closeMenu}
+                                        className={({isActive}) => `${isActive ? 'active' : undefined}` }
+                                    >
                                         Crear Receta
-                                    </Link>
+                                    </NavLink>
                                 </li>
                                 <li>
-                                    <Link to='/dashboard'>
+                                    <NavLink 
+                                        to='/dashboard'
+                                        onClick={closeMenu}
+                                        className={({isActive}) => `${isActive ? 'active' : undefined}` }
+                                    >
                                         Mis Recetas
-                                    </Link>
+                                    </NavLink>
                                 </li>
                                 <li>
                                     <Link 
                                         to='/'
-                                        onClick={handleLogout}
+                                        onClick={() => {handleLogout(); closeMenu()}}                                        
                                     >
                                        Cerrar Sesión
                                     </Link>
                                 </li>
                             </ul>
-                        </div>
+                        
                     ): (
-                    <div className="nav__menu">
+                    
                         <ul>
                             <li>
-                                <Link to='/'>
+                                <NavLink 
+                                    to='/'
+                                    onClick={closeMenu}
+                                    className={({isActive}) => `${isActive ? 'active' : undefined}` }
+                                >
                                     Inicio
-                                </Link>
+                                </NavLink>
                             </li>
                             <li>
-                                <Link to='/'>
+                                <NavLink 
+                                    to='/about'
+                                    onClick={closeMenu}
+                                    className={({isActive}) => `${isActive ? 'active' : undefined}` }
+                                >
                                     Nosotros
-                                </Link>
+                                </NavLink>
                             </li>
                             <li>
-                                <Link to='/'>
+                                <NavLink 
+                                    to='/chefs'
+                                    onClick={closeMenu}
+                                    className={({isActive}) => `${isActive ? 'active' : undefined}` }
+                                >
                                     Chefs
-                                </Link>
+                                </NavLink>
                             </li>
+                        {
+                            !auth?.user&& (
+                            <>
+                                <li
+                                    className='hide__desktop'
+                                >
+                                    <NavLink 
+                                        to='/login'                                        
+                                        onClick={closeMenu}
+                                        className={({isActive}) => `${isActive ? 'active' : undefined}` }
+                                    >
+                                        Iniciar Sesión
+                                    </NavLink>
+                                </li>
+                                <li
+                                    className='hide__desktop'
+                                >
+                                    <NavLink 
+                                        to='/register'                                        
+                                        onClick={closeMenu}
+                                    >
+                                        Registrarse
+                                    </NavLink>
+                                </li>
+                            </>  
+                            )
+                        }
                         </ul>
-                    </div>
+                    
                     )
                 }
+                </div>
             </div>
 
             {
@@ -84,12 +144,18 @@ const Navbar = () => {
                     <div
                         className='nav__auth'
                     >
-                        <Link to='/login'>
+                        <NavLink 
+                            to='/login'
+                            className={({isActive}) => `${isActive ? 'active' : undefined}` }
+                        >
                             Iniciar Sesión
-                        </Link>
-                        <Link to='/register'>
+                        </NavLink>
+                        <NavLink 
+                            to='/register'
+                            className={({isActive}) => `${isActive ? 'active' : undefined}` }
+                        >
                             Registrarse
-                        </Link>
+                        </NavLink>
                     </div>
                 ) 
             }
@@ -97,8 +163,10 @@ const Navbar = () => {
             <div
                 className='nav__mobile'
             >
-                <button>
-                    <FaBars />
+                <button
+                    onClick={() => setShowMenu(prev => !prev)}
+                >
+                    { showMenu ? <FaTimes/> : <FaBars/>}
                 </button>
             </div>
 

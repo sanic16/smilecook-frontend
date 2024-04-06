@@ -36,7 +36,39 @@
     gap: 0.2rem;
 }
 
+.dashboard__recipe-right{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
 .dashboard__recipe-actions{
     display: flex;
     gap: 0.5rem;
+}
+
+.dashboard__recipe-publish{
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+@media screen and (max-width: 768px){
+    .dashboard__recipe{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+   .dashboard__recipe-right{
+        flex-direction: row;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 0.5rem; 
+   }
+
+   .dashboard__recipe-publish{
+    justify-content: flex-start;
+   }
 }

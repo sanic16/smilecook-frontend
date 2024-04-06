@@ -1,4 +1,5 @@
 .dashboard__recipes{
+    width: 100%;
     display: grid;
     gap: 2rem;
 }
