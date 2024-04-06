@@ -10,6 +10,8 @@ const Recipe = (
         recipe: Recipe
     }
 ) => {
+  const shortDescription = recipe.description.length > 100 ? recipe.description.slice(0, 100) + '...' : recipe.description
+  const shortName = recipe.name.length > 20 ? recipe.name.slice(0, 20) + '...' : recipe.name  
   return (
     <Card className='recipe'>
         
@@ -18,10 +20,10 @@ const Recipe = (
                     <img src={recipe.cover_image} alt={recipe.name} />
                 </div>
                 <h4 className="recipe__name">
-                    { recipe.name }
+                    { shortName }
                 </h4>
                 <div className="recipe__desc">
-                    { recipe.description }
+                    { shortDescription }
                 </div>
             </div>
 

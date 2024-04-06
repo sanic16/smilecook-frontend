@@ -50,6 +50,11 @@ const recipeApiSlice = api.injectEndpoints({
                 url: `recipes/${body.id}`,
                 method: 'DELETE'
             })
+        }),
+        getRecipe: builder.query<Recipe, {id: number}>({
+            query: (body) => ({
+                url: `recipes/${body.id}`
+            })
         })
     })
 })
@@ -62,5 +67,6 @@ export const {
     usePublishRecipeMutation,
     useUnPublishRecipeMutation,
     useGetMyRecipesQuery,
-    useDeleteRecipeMutation
+    useDeleteRecipeMutation,
+    useGetRecipeQuery
 } = recipeApiSlice
